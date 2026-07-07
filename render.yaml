@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: kalori-backend
+    runtime: node
+    plan: starter          # Starter ($7/bln) supaya bisa pakai persistent disk & tidak sleep.
+                            # Ganti ke "free" kalau cuma mau testing dulu (tapi disk di bawah
+                            # tidak akan berfungsi/persisten di plan free).
+    region: singapore       # Region terdekat ke Indonesia. Ganti kalau mau region lain.
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeploy: true
+    disk:
+      name: kalori-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: 22.22.2      # Samakan dengan isi file .node-version / hasil `node -v` di lokalmu
+      - key: DATA_DIR
+        value: /var/data     # Harus sama dengan disk.mountPath di atas
+      - key: ANTHROPIC_MODEL
+        value: claude-sonnet-4-6
+      - key: ALLOWED_ORIGINS
+        value: "*"
+      - key: ANTHROPIC_API_KEY
+        sync: false           # Rahasia: Render akan minta kamu isi manual saat pertama deploy blueprint
