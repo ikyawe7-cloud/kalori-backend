@@ -10,8 +10,8 @@ function required(name) {
 
 module.exports = {
   port: process.env.PORT || 3000,
-  anthropicApiKey: required('ANTHROPIC_API_KEY'),
-  anthropicModel: process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-6',
+  googleApiKey: required('GOOGLE_API_KEY'),
+  geminiModel: process.env.GEMINI_MODEL || 'gemini-3.5-flash',
   allowedOrigins: (process.env.ALLOWED_ORIGINS || '*').split(',').map(s => s.trim()),
   // Folder tempat file database SQLite disimpan. Di lokal default ke folder ./data
   // di root proyek. Di Render (atau platform lain yang pakai persistent disk),

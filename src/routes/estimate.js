@@ -1,5 +1,5 @@
 const express = require('express');
-const { estimateMealCalories } = require('../services/claude');
+const { estimateMealCalories } = require('../services/gemini');
 
 const router = express.Router();
 
